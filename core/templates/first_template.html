@@ -1,7 +1,8 @@
-<!doctype html>
-<html lang="ru">
-    <head><meta charset="utf-8"><title>Барбершоп "Арбуз"</title></head>
-    <body>
-        <h1>Добро пожаловать в барбершоп "{{ name }}"!</h1>
-    </body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Главная{% endblock %}
+{% block header %}Добро пожаловать{% endblock %}
+
+{% block content %}
+    <p class="lead">Наследование работает. Дальше подключим статику и конвертеры.</p>
+{% endblock %}
