@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Мастера{% endblock %}
+
+{% block content %}
+<h1>Наши мастера</h1>
+<ul>
+  {% for m in masters %}
+  <li>
+    <a href="{% url 'master_detail' m.name %}">{{m.name}} - {{m.skill}}</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock content %}

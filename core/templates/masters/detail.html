@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Мастер {{ name }}{% endblock %}
+{% block content %}
+  {% if master %}
+    <h2>{{ master.name }}</h2>
+    <p>Навык: {{ master.skill }}</p>
+    <p><a href="{% url 'masters_list' %}">← Назад к списку</a></p>
+  {% else %}
+    <p>Мастер с именем «{{ name }}» не найден.</p>
+    <p><a href="{% url 'masters_list' %}">← К списку мастеров</a></p>
+  {% endif %}
+{% endblock %}

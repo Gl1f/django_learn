@@ -19,6 +19,8 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 from core.views import index
+from core.views import masters_list, master_detail
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,3 +28,8 @@ urlpatterns = [
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+urlpatterns += [
+    path("masters/", masters_list, name="masters_list"),
+    path("masters/<str:name>/", master_detail, name="master_detail"),
+]
