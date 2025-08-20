@@ -2,12 +2,89 @@
 {% block title %}Мастера{% endblock %}
 
 {% block content %}
-<h1>Наши мастера</h1>
-<ul>
-  {% for m in masters %}
-  <li>
-    <a href="{% url 'master_detail' m.name %}">{{m.name}} - {{m.skill}}</a>
-  </li>
-  {% endfor %}
-</ul>
-{% endblock content %}
+<div class="masters-page">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h1 class="h3 m-0"><i class="bi bi-people me-2"></i>Наши мастера</h1>
+
+    <!-- Кнопка Bootstrap Collapse: без JS-кода -->
+    <button class="btn btn-sm btn-outline-secondary"
+            data-bs-toggle="collapse"
+            data-bs-target="#mastersHelp">
+      <i class="bi bi-question-circle me-1"></i> Подсказка
+    </button>
+  </div>
+
+  <!-- Скрывающийся блок: объяснение + легенда статусов -->
+  <div id="mastersHelp" class="collapse mb-4">
+    <div class="alert alert-secondary mb-0">
+      <div class="d-flex align-items-start">
+        <i class="bi bi-lightbulb me-2 fs-5"></i>
+        <div>
+          Это список мастеров в адаптивной сетке Bootstrap.
+          Используем: <code>row</code>/<code>col-*</code>, условия и <code>forloop</code>.
+          Иконки — Bootstrap Icons. Компонент <code>collapse</code> работает через <code>data-bs-*</code> без нашего JS.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3">
+    {% comment %}
+      Предположим, что в контексте есть:
+      masters = [
+        {"name": "Анна", "skills": ["Стрижка", "Окрашивание"]},
+        {"name": "Борис", "skills": ["Стрижка"]},
+        ...
+      ]
+      Если у тебя только имена — тоже ок, просто убери блок skills.
+    {% endcomment %}
+
+    {% for master in masters %}
+      <!-- Каждая карточка занимает 12 колонок на XS, 6 — на SM, 4 — на MD+ -->
+      <div class="col-12 col-sm-6 col-md-4">
+        <div class="card card-master h-100">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+              <!-- Номер через forloop -->
+              <span class="badge text-bg-secondary badge-master">#{{ forloop.counter }}</span>
+
+              <!-- Условная подсветка: если имя длиннее 5 символов — «старший» :) -->
+              {% if master.name|length > 5 %}
+                <span class="badge text-bg-success"><i class="bi bi-award me-1"></i>Старший</span>
+              {% else %}
+                <span class="badge text-bg-light text-muted">Младший</span>
+              {% endif %}
+            </div>
+
+            <h2 class="h5 mt-3 mb-2">
+              <i class="bi bi-person-workspace me-2"></i>{{ master.name }}
+            </h2>
+
+            <!-- Навигация на детальную по имени -->
+            <p class="mb-2">
+              <a class="btn btn-sm btn-primary" href="{% url 'master_detail' master.name %}">
+                <i class="bi bi-arrow-right-circle me-1"></i> Профиль
+              </a>
+            </p>
+
+            <!-- Навешиваем навыки, если есть -->
+            {% if master.skills %}
+              <div class="mt-2">
+                {% for s in master.skills %}
+                  <span class="skill-pill">{{ s }}</span>
+                {% empty %}
+                  <span class="text-muted">Навыки не указаны</span>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="col-12">
+        <div class="alert alert-warning">Пока нет мастеров</div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

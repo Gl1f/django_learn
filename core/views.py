@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+
 
 MASTERS = [
     {"id": 1, "name": "Алевтина", "skill": "Fade"},
