@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}Мастер: {{ master.name }}{% endblock %}
+
+{% block content %}
+    <h1 class="mb-3">{{ master.name }}</h1>
+    <p>Уровень: <b>{{ master.level }}</b></p>
+
+    <a class="btn btn-outline-secondary" href="{% url 'master_list' %}">← назад к списку</a>
+{% endblock %}

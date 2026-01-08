@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Мастера{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">Список мастеров</h1>
+
+    <div class="list-group">
+    {% for m in masters %}
+        <a class="list-group-item list-group-item-action"
+            href="{% url 'master_detail' m.id %}">
+        {{ m.name }} — {{ m.level }}
+        </a>
+    {% endfor %}
+    </div>
+{% endblock %}

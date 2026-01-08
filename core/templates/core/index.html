@@ -1,32 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
-</head>
-<body>
-    <h1>{{ title }}</h1>
-    <p>Привет, {{ name }}!</p>
+{% extends "base.html" %}
 
+{% block title %}Главная | Barbershop{% endblock title %}
 
+{% block content %}
+    <h1 class="mb-3">Добро пожаловать!</h1>
+
+    <p class="text-muted">
+    Если эта кнопка синяя и красивая — Bootstrap подключился правильно 😄
+    </p>
+
+    <a class="btn btn-primary" href="{% url 'master_list' %}">Список мастеров</a>
+
+    <hr class="my-4" />
+
+    <h2 class="h4">Эксперименты с типами данных</h2>
     <p>integer: {{ integer }}</p>
     <p>float: {{ float }}</p>
     <p>string: {{ string }}</p>
 
     <p>num_list: {{ num_list }}</p>
     <p>num_list.0: {{ num_list.0 }}</p>
-    <p>num_list.1: {{ num_list.1 }}</p>
 
-    <p>name_dict: {{ name_dict }}</p>
     <p>name_dict.name: {{ name_dict.name }}</p>
-    <p>name_dict.price: {{ name_dict.price }}</p>
-
-    <p>string_set: {{ string_set }}</p>
-
-    <p>name_object: {{ name_object }}</p>
     <p>name_object.name: {{ name_object.name }}</p>
-    <p>name_object.age: {{ name_object.age }}</p>
     <p>name_object.age_in_days: {{ name_object.age_in_days }}</p>
-</body>
-</html>
+{% endblock content %}
